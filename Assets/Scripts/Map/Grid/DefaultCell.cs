@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 namespace Map.Grid
 {
@@ -13,7 +12,6 @@ namespace Map.Grid
         public Vector2 Position { get; }
         public Vector2 Size { get; }
         public Vector2 Center { get; }
-        public Color TestColor { get; }
 
         private readonly Vector2 _leftUpPoint;
         private readonly Vector2 _rightUpPoint;
@@ -23,9 +21,6 @@ namespace Map.Grid
 
         public DefaultCell(Vector2 position, Vector2Int size)
         {
-            var r = Random.Range(0f, 1f);
-            TestColor = new Color(r,r, r);
-            
             Position = position;
             Size = size;
 

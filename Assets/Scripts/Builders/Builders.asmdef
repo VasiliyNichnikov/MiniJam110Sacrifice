@@ -1,0 +1,18 @@
+{
+    "name": "Builders",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b616b79bdfc8af743956f20670bc3f44",
+        "GUID:d9cc35f02d204e24fa964f40abd077cd",
+        "GUID:14dc4e5f84c13494d98edc468cb31e13"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
