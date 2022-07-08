@@ -10,18 +10,18 @@ namespace Map.Grid
     /// </summary>
     public class DefaultCell : ICell
     {
-        public Vector2Int Position { get; }
-        public Vector2Int Size { get; }
+        public Vector2 Position { get; }
+        public Vector2 Size { get; }
         public Vector2 Center { get; }
         public Color TestColor { get; }
 
-        private readonly Vector2Int _leftUpPoint;
-        private readonly Vector2Int _rightUpPoint;
+        private readonly Vector2 _leftUpPoint;
+        private readonly Vector2 _rightUpPoint;
 
-        private readonly Vector2Int _leftDownPoint;
-        private readonly Vector2Int _rightDownPoint;
+        private readonly Vector2 _leftDownPoint;
+        private readonly Vector2 _rightDownPoint;
 
-        public DefaultCell(Vector2Int position, Vector2Int size)
+        public DefaultCell(Vector2 position, Vector2Int size)
         {
             var r = Random.Range(0f, 1f);
             TestColor = new Color(r,r, r);
@@ -32,9 +32,9 @@ namespace Map.Grid
             Center = (Vector2)Size / 2 + position;
             
             _leftDownPoint = position;
-            _rightDownPoint = new Vector2Int(position.x + size.x, position.y);
+            _rightDownPoint = new Vector2(position.x + size.x, position.y);
             
-            _leftUpPoint =  new Vector2Int(position.x, position.y + size.y);
+            _leftUpPoint =  new Vector2(position.x, position.y + size.y);
             _rightUpPoint = position + size;
         }
 
@@ -58,7 +58,7 @@ namespace Map.Grid
             return inArea;
         }
         
-        private int Side(Vector2Int a, Vector2Int b, Vector2 p)
+        private int Side(Vector2 a, Vector2 b, Vector2 p)
         {
             return Math.Sign((b.x - a.x) * (p.y - a.y) - (b.y - a.y) * (p.x - a.x));
         }

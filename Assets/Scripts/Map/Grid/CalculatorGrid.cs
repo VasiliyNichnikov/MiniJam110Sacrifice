@@ -8,10 +8,12 @@ namespace Map.Grid
     public class CalculatorGrid
     {
         private readonly IGrid _grid;
+        private readonly Vector2 _offset;
 
-        public CalculatorGrid(IGrid grid)
+        public CalculatorGrid(IGrid grid, Vector2 offset)
         {
             _grid = grid;
+            _offset = offset;
         }
 
         public ICell[,] GetArrayGrid()
@@ -24,7 +26,7 @@ namespace Map.Grid
             {
                 for(var x = 0; x < numberX; x++)
                 {
-                    var position = new Vector2Int(y, x) * _grid.SizeCell;
+                    var position = new Vector2Int(y, x) * _grid.SizeCell + _offset;
                     cells[y, x] = new DefaultCell(position: position, size: _grid.SizeCell);
                 }
             }

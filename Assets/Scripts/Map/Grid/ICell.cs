@@ -4,8 +4,8 @@ namespace Map.Grid
 {
     public interface ICell
     {
-        public Vector2Int Position { get; }
-        public Vector2Int Size { get; }
+        public Vector2 Position { get; }
+        public Vector2 Size { get; }
         public Vector2 Center { get; }
         public Color TestColor { get; }
         
