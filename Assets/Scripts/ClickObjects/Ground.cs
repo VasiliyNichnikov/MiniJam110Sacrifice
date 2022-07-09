@@ -4,6 +4,7 @@ namespace ClickObjects
 {
     public class Ground: MonoBehaviour, IClickObject
     {
-        public bool IsGround => true;
+        public bool IsClick => true;
+        public bool IsAction => false;
     }
 }

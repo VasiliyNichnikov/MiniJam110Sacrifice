@@ -1,6 +1,4 @@
-﻿using SelectedObjects.Units.StatePattern;
-
-namespace SettlementObjects.Units.StatePattern.States
+﻿namespace SettlementObjects.Units.StatePattern.States
 {
     public class AttackState : State
     {

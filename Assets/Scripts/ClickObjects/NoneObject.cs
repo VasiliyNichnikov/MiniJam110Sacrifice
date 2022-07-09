@@ -2,6 +2,7 @@
 {
     public class NoneObject: IClickObject
     {
-        public bool IsGround => false;
+        public bool IsClick => false;
+        public bool IsAction => false;
     }
 }

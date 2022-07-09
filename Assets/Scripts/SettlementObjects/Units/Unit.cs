@@ -1,5 +1,7 @@
+using System;
 using ClickObjects;
-using SelectedObjects.Units.StatePattern;
+using SettlementObjects.Builders;
+using SettlementObjects.Units.StatePattern;
 using SettlementObjects.Units.StatePattern.States;
 using Units;
 using UnityEngine;
@@ -11,6 +13,8 @@ namespace SettlementObjects.Units
     {
         public IdleState Idle;
         public WalkingState Walking;
+        public FellingTreesState Felling;
+
         public (IClickObject hit, Vector3 position) Click { get; private set; }
         public override TypesOfObjects TypeObject => TypesOfObjects.Unit;
         public NavMeshAgent Agent => _agent;
@@ -32,6 +36,7 @@ namespace SettlementObjects.Units
             _stateMachine = new StateMachine();
             Idle = new IdleState(this, _stateMachine);
             Walking = new WalkingState(this, _stateMachine);
+            Felling = new FellingTreesState(this, _stateMachine);
             _stateMachine.Initialize(Idle);
         }
 

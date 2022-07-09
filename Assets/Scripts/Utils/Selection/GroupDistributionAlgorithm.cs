@@ -8,9 +8,8 @@ namespace Utils.Selection
         public static List<Vector3> GetPositionListAround(Vector3 newCenter, float[] ringDistanceArray,
             int[] ringPositionCountArray)
         {
-            List<Vector3> positionList = new List<Vector3>();
-            positionList.Add(newCenter);
-            for (int i = 0; i < ringDistanceArray.Length; i++)
+            var positionList = new List<Vector3> { newCenter };
+            for (var i = 0; i < ringDistanceArray.Length; i++)
             {
                 positionList.AddRange(GetPositionListAround(newCenter, ringDistanceArray[i],
                     ringPositionCountArray[i]));
@@ -19,14 +18,14 @@ namespace Utils.Selection
             return positionList;
         }
 
-        private static List<Vector3> GetPositionListAround(Vector3 newCenter, float distance, int positionCount)
+        private static IEnumerable<Vector3> GetPositionListAround(Vector3 newCenter, float distance, int positionCount)
         {
-            List<Vector3> positionList = new List<Vector3>();
+            var positionList = new List<Vector3>();
             for (int i = 0; i < positionCount; i++)
             {
                 float angle = i * (360f / positionCount);
-                Vector3 direction = ApplyRotationToVector(new Vector3(1, 0, 0), angle);
-                Vector3 position = newCenter + direction * distance;
+                var direction = ApplyRotationToVector(new Vector3(1, 0, 0), angle);
+                var position = newCenter + direction * distance;
                 positionList.Add(position);
             }
 

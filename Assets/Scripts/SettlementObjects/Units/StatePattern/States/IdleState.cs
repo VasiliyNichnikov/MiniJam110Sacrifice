@@ -1,4 +1,4 @@
-﻿using SelectedObjects.Units.StatePattern;
+﻿using SettlementObjects.Builders;
 
 namespace SettlementObjects.Units.StatePattern.States
 {
@@ -18,14 +18,21 @@ namespace SettlementObjects.Units.StatePattern.States
             // Прекращаем действия, которые могут выполняться юнитом
         }
         
-
+        // TODO Дублирование кода с WalkState
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (Unit.Click.hit.IsGround)
+            if (Unit.Click.hit.IsClick == false) return;
+            if (Unit.Click.hit.IsAction)
             {
-                StateMachine.ChangeState(Unit.Walking); // TODO перенести состояние из Unit
+                var builder = GetBuilderForWork();
+                if (builder is Trees)
+                {
+                    StateMachine.ChangeState(Unit.Felling);
+                    return;
+                }
             }
+            StateMachine.ChangeState(Unit.Walking); // TODO перенести состояние из Unit
         }
     }
 }

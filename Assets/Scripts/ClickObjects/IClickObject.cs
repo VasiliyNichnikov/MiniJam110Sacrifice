@@ -2,6 +2,7 @@
 {
     public interface IClickObject
     {
-        public bool IsGround { get; }
+        public bool IsClick { get; }
+        public bool IsAction { get; }
     }
 }
