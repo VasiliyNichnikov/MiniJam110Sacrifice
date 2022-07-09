@@ -1,9 +1,9 @@
 {
-    "name": "Map",
+    "name": "SettlementObjects",
     "rootNamespace": "",
     "references": [
-        "GUID:14dc4e5f84c13494d98edc468cb31e13",
-        "GUID:439ef146850dd744e99d274c0f626bd0"
+        "GUID:439ef146850dd744e99d274c0f626bd0",
+        "GUID:3fa48a1babf1c194ca8dabda1070e780"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
