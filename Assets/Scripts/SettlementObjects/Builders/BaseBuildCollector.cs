@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using ClickObjects;
+﻿using ClickObjects;
 using SettlementObjects.Errors;
-using SettlementObjects.Resource;
 using SettlementObjects.Units;
-using Timer;
 using UnityEngine;
 
 namespace SettlementObjects.Builders
@@ -12,31 +9,16 @@ namespace SettlementObjects.Builders
     {
         public bool IsClick => true;
         public bool IsWork => true;
+        public int NumberOfWorkers { get; private set; }
 
-        private IResource Resource
-        {
-            get
-            {
-#if UNITY_EDITOR
-                if (_resource != null && (_resource is IResource) == false)
-                    Debug.LogError("Resource must be a IResource");
-#endif
-                return _resource as IResource;
-            }
-        }
+
 
         [SerializeField, Header("Позиции для поселенцев, где они могут работать")]
         private Transform[] _positionsForSettlers;
-
-        [SerializeField, Header("Ресурс, который производит данное строение")]
-        private ScriptableObject _resource;
         
-        private IEnumerator _selectedWork;
-        private int _numberOfWorkers;
         private IObjectToSelect[] _occupiedJobs;
         
-
-
+        
         public Vector3 SubscribeToJob(Unit unit)
         {
             var positionWork = GetPositionWork(unit);
@@ -50,7 +32,7 @@ namespace SettlementObjects.Builders
             {
                 if (_occupiedJobs[indexJob] == null)
                 {
-                    _numberOfWorkers++;
+                    NumberOfWorkers++;
                     _occupiedJobs[indexJob] = unit;
                     return _positionsForSettlers[indexJob].position;
                 }
@@ -65,7 +47,7 @@ namespace SettlementObjects.Builders
             {
                 if (ReferenceEquals(_occupiedJobs[indexJob], unit))
                 {
-                    _numberOfWorkers--;
+                    NumberOfWorkers--;
                     _occupiedJobs[indexJob] = null;
                     break;
                 }
@@ -75,26 +57,8 @@ namespace SettlementObjects.Builders
 
         private void Start()
         {
+            NumberOfWorkers = 0;
             _occupiedJobs = new IObjectToSelect[_positionsForSettlers.Length];
-
-            if (_selectedWork != null) return;
-            _selectedWork = Work();
-            StartCoroutine(_selectedWork);
-        }
-
-        private IEnumerator Work()
-        {
-            var timer = new TimerResource(Resource.CollectionTime);
-            while (true)
-            {
-                yield return null;
-                if (timer.InProgress == false)
-                {
-                    yield return timer.Coroutine();
-                    var quantity = Resource.Quantity * _numberOfWorkers;
-                    ResourceCreditingEvents.UpdateResource(quantity, Resource);
-                }
-            }
         }
     }
 }
