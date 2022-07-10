@@ -1054,6 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selector: {fileID: 7038775601730283224}
+  ToolAxe: {fileID: 7885707068553126332}
 --- !u!195 &7038775601318342229
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1248,6 +1249,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7120a4c00fbb25743a4c42c6518d86f9, type: 3}
+--- !u!1 &7885707068553126332 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 7120a4c00fbb25743a4c42c6518d86f9, type: 3}
+  m_PrefabInstance: {fileID: 7038775600272137453}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7360140048858430214 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 7120a4c00fbb25743a4c42c6518d86f9, type: 3}
