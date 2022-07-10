@@ -42,7 +42,7 @@ namespace Economy
             var currentValue = GetCountResource(resource);
             var slider = GetSlider(resource);
             var result = 0;
-            
+
             if (income < 0)
             {
                 var absIncome = Mathf.Abs(income);
