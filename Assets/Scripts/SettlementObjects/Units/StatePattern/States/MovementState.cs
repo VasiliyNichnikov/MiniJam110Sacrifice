@@ -1,4 +1,7 @@
-﻿namespace SettlementObjects.Units.StatePattern.States
+﻿using System;
+using SettlementObjects.Builders;
+
+namespace SettlementObjects.Units.StatePattern.States
 {
     public class MovementState : State
     {
@@ -28,6 +31,19 @@
             // TODO Добавить настройки distance и remainingDistacne
             if (Unit.Agent.remainingDistance <= 0.5f && Unit.Agent.hasPath) // || Unit.Agent.remainingDistance <= 0.2f && Unit.Agent.hasPath
             {
+                // todo не лучшее решение
+                if (Unit.Action.clickedObject.IsWork)
+                {
+                    State state = Unit.Action.clickedObject switch
+                    {
+                        Trees _ => Unit.Logger,
+                        Field _ => Unit.Field,
+                        _ => throw new ArgumentNullException()
+                    };
+                    StateMachine.ChangeState(state);
+                    Unit.ResetParametersAction();
+                    return;
+                }
                 Unit.ResetParametersAction();
                 StateMachine.ChangeState(Unit.Idle);
             }

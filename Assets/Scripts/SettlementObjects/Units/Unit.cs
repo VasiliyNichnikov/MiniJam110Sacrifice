@@ -12,6 +12,8 @@ namespace SettlementObjects.Units
     {
         public IdleState Idle;
         public MovementState Movement;
+        public LoggerState Logger;
+        public FieldState Field;
 
         public (IClickObject clickedObject, Vector3 position) Action { get; private set; }
         public IBuilder BuilderWork { get; private set; }
@@ -34,11 +36,17 @@ namespace SettlementObjects.Units
             _stateMachine = new StateMachine();
             Idle = new IdleState(this, _stateMachine);
             Movement = new MovementState(this, _stateMachine);
+            Logger = new LoggerState(this, _stateMachine);
+            Field = new FieldState(this, _stateMachine);
+            
             _stateMachine.Initialize(Idle);
         }
 
         public void SetParametersAction((IClickObject clickedObject, Vector3 position) selectedAction)
         {
+            if(selectedAction.clickedObject == BuilderWork)
+                return;
+            
             BuilderWork?.UnsubscribeToWork(this);
             BuilderWork = null;
             try
