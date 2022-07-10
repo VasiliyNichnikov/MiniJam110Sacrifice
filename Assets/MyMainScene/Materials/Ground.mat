@@ -7,11 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-<<<<<<<< HEAD:Assets/Materials/Ground.mat
   m_Name: Ground
-========
-  m_Name: Yellow
->>>>>>>> VisualTier1:Assets/Resources/Map/Grass/New Folder/Yellow.mat
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -100,7 +96,7 @@ Material:
     - _Parallax: 0.005
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.33
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -108,16 +104,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-<<<<<<<< HEAD:Assets/Materials/Ground.mat
-    - _BaseColor: {r: 0.6008665, g: 1, b: 0.3726415, a: 1}
-========
-    - _BaseColor: {r: 1, g: 1, b: 0, a: 1}
->>>>>>>> VisualTier1:Assets/Resources/Map/Grass/New Folder/Yellow.mat
+    - _BaseColor: {r: 0.45234218, g: 0.6509434, b: 0.1013261, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &1575568795206018018
+--- !u!114 &4248004178938976574
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
