@@ -59,7 +59,7 @@ MonoBehaviour:
       RenderQueueType: 0
       LayerMask:
         serializedVersion: 2
-        m_Bits: 64
+        m_Bits: 128
       PassNames: []
     overrideMaterial: {fileID: 2100000, guid: 03f0da758e034c8499d3436214037156, type: 2}
     overrideMaterialPassIndex: 0
@@ -149,10 +149,10 @@ MonoBehaviour:
     materialErrorPS: {fileID: 4800000, guid: 5fd9a8feb75a4b5894c241777f519d4e, type: 3}
   m_OpaqueLayerMask:
     serializedVersion: 2
-    m_Bits: 887
+    m_Bits: 1783
   m_TransparentLayerMask:
     serializedVersion: 2
-    m_Bits: 887
+    m_Bits: 1783
   m_DefaultStencilState:
     overrideStencilState: 0
     stencilReference: 0
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef6d2d7bf3633e4baf72310f121f717, type: 3}
   m_Name: NewPixelisationFeature
   m_EditorClassIdentifier: 
-  m_Active: 0
+  m_Active: 1
   UseDepthTestingForIDOutlines: 1
   DepthTestThreshold: 0.001
   UseNormalsForEdgeDetection: 1
