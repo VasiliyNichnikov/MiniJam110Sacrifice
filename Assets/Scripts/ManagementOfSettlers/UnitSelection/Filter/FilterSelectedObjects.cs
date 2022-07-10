@@ -24,7 +24,7 @@ namespace ManagementOfSettlers.UnitSelection.Filter
         {
             if (_firstSelectedObject == null)
                 throw new Exception("The first filter object should be");
-            return selectedOne.TypeObject == _firstSelectedObject.TypeObject;
+            return selectedOne.GetType() == _firstSelectedObject.GetType();
         }
     }
 }

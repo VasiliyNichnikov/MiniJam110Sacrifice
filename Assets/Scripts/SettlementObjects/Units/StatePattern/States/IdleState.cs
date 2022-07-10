@@ -1,4 +1,6 @@
-﻿namespace SettlementObjects.Units.StatePattern.States
+﻿using UnityEngine;
+
+namespace SettlementObjects.Units.StatePattern.States
 {
     public class IdleState : State
     {
@@ -21,7 +23,7 @@
         {
             base.LogicUpdate();
             if (Unit.Action.clickedObject.IsClick == false) return;
-            StateMachine.ChangeState(Unit.Movement); // TODO перенести состояние из Unit
+            StateMachine.ChangeState(Unit.Movement);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Units;
-using UnityEngine;
+﻿using UnityEngine;
 using Utils.Selection;
 
 namespace SettlementObjects.Units
@@ -10,7 +9,6 @@ namespace SettlementObjects.Units
 
         [SerializeField, Header("Объект, показывающий игроку, что юнит выделен")]
         private GameObject _selector;
-        public virtual TypesOfObjects TypeObject { get; }
         public bool IsSelected { get; private set; }
 
         public bool CheckSelection(Camera camera, Vector3 startSelectionPanel, Vector3 endSelectionPanel)

@@ -1,4 +1,6 @@
-﻿namespace SettlementObjects.Units.StatePattern.States
+﻿using UnityEngine;
+
+namespace SettlementObjects.Units.StatePattern.States
 {
     public class MovementState : State
     {
@@ -27,7 +29,7 @@
             // TODO Добавить настройки distance и remainingDistacne
             if (Unit.Agent.remainingDistance <= 0.5f) // || Unit.Agent.remainingDistance <= 0.2f && Unit.Agent.hasPath
             {
-                Unit.ResetParametersAction();
+                // Unit.ResetParametersAction();
                 StateMachine.ChangeState(Unit.Idle); // TODO перенести состояние из Unit
             }
         }
