@@ -16,17 +16,17 @@ namespace SettlementObjects.Units
         public (IClickObject clickedObject, Vector3 position) Action { get; private set; }
         public IBuilder BuilderWork { get; private set; }
         public NavMeshAgent Agent => _agent;
-        // public Animator Animator => _animator;
+        public Animator Animator => _animator;
 
         private StateMachine _stateMachine;
-        // private Animator _animator;
+        private Animator _animator;
         private NavMeshAgent _agent;
 
         public override void Start()
         {
             base.Start();
             _agent = GetComponent<NavMeshAgent>();
-            // _animator = GetComponent<Animator>();
+            _animator = GetComponent<Animator>();
             
             Action = (new NoneObject(), Vector3.zero);
             
@@ -46,7 +46,7 @@ namespace SettlementObjects.Units
                 BuilderWork = GetBuilderForWork(selectedAction);
                 selectedAction.position = BuilderWork.SubscribeToJob(this);
             }
-            catch (ObjectIsNotBuilding e)
+            catch (ObjectIsNotBuilding)
             {
                 
             }
