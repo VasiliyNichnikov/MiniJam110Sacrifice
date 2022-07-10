@@ -2,11 +2,11 @@
 
 namespace Map.Grid.Errors
 {
-    public class GridErrorException : Exception
+    public class GridError : Exception
     {
     }
     
-    public class InvalidSizeValueGridError : GridErrorException
+    public class InvalidSizeValueGridError : GridError
     {
     }
 }

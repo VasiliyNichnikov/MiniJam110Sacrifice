@@ -1,9 +1,9 @@
 {
-    "name": "Map",
+    "name": "HighlightingSettlementObjects",
     "rootNamespace": "",
     "references": [
-        "GUID:14dc4e5f84c13494d98edc468cb31e13",
-        "GUID:439ef146850dd744e99d274c0f626bd0"
+        "GUID:54dfb48d80600a449b5d4e860987e05a",
+        "GUID:3fa48a1babf1c194ca8dabda1070e780"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

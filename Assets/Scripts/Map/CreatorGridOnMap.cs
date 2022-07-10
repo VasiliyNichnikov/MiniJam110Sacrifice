@@ -1,7 +1,7 @@
 ﻿using System;
 using Map.Grid;
-using ObjectUnity;
 using UnityEngine;
+using Utils.Boundary;
 
 namespace Map
 {
