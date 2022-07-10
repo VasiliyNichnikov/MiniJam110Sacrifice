@@ -9,6 +9,7 @@
         public override void Enter()
         {
             base.Enter();
+            Unit.ToolAxe.SetActive(true);
             Unit.Animator.SetBool("AxeBlow", true);
         }
 
@@ -24,6 +25,7 @@
         public override void Exit()
         {
             base.Exit();
+            Unit.ToolAxe.SetActive(false);
             Unit.Animator.SetBool("AxeBlow", false);
         }
     }

@@ -7,8 +7,7 @@ namespace ManagementOfSettlers.UnitSelection.Buffer
     public class BufferOfSelectedObjects : MonoBehaviour, IBuffer
     {
         public IEnumerable<ObjectToSelect> SelectedObjects => _selectedObjects.ToArray();
-
-        [SerializeField, Header("Стартовые постройки и юниты, с которыми можно взаимодействовать")]
+        
         private List<ObjectToSelect> _selectedObjects;
 
         public void Add(ObjectToSelect selectedObject)
@@ -28,9 +27,9 @@ namespace ManagementOfSettlers.UnitSelection.Buffer
             return objectToSelects.ToArray();
         }
 
-        public void Clear()
+        private void Start()
         {
-            _selectedObjects.Clear();
+            _selectedObjects = new List<ObjectToSelect>(FindObjectsOfType<ObjectToSelect>());
         }
     }
 }

@@ -19,6 +19,7 @@ namespace SettlementObjects.Units
         public IBuilder BuilderWork { get; private set; }
         public NavMeshAgent Agent => _agent;
         public Animator Animator => _animator;
+        public GameObject ToolAxe;
 
         private StateMachine _stateMachine;
         private Animator _animator;
@@ -31,6 +32,9 @@ namespace SettlementObjects.Units
             _animator = GetComponent<Animator>();
             
             Action = (new NoneObject(), Vector3.zero);
+            
+            // Выключение топара при старте
+            ToolAxe.SetActive(false);
             
             // Инициализация состояний
             _stateMachine = new StateMachine();
