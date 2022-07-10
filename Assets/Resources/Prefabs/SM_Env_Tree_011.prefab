@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 422390741407910616}
   - component: {fileID: 6665909310187764250}
   - component: {fileID: 729595488769317665}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: SM_Env_Tree_011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6761559445507905239}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: WorkPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
