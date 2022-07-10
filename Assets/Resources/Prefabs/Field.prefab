@@ -607,7 +607,6 @@ MonoBehaviour:
   - {fileID: 2889417640542312687}
   - {fileID: 1221241325326392085}
   - {fileID: 644823294434336304}
-  _resource: {fileID: 11400000, guid: 3afc25e6fe64587478e887501b93036f, type: 2}
 --- !u!1 &4058683724470731187
 GameObject:
   m_ObjectHideFlags: 0
