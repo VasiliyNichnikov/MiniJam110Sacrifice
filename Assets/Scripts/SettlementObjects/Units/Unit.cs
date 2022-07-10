@@ -3,7 +3,6 @@ using SettlementObjects.Builders;
 using SettlementObjects.Errors;
 using SettlementObjects.Units.StatePattern;
 using SettlementObjects.Units.StatePattern.States;
-using Units;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,7 +15,6 @@ namespace SettlementObjects.Units
 
         public (IClickObject clickedObject, Vector3 position) Action { get; private set; }
         public IBuilder BuilderWork { get; private set; }
-        public override TypesOfObjects TypeObject => TypesOfObjects.Unit;
         public NavMeshAgent Agent => _agent;
         // public Animator Animator => _animator;
 
