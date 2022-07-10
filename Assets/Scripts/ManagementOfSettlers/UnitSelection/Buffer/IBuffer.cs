@@ -10,7 +10,5 @@ namespace ManagementOfSettlers.UnitSelection.Buffer
         public IEnumerable<ObjectToSelect> GetUnits();
 
         public void Add(ObjectToSelect selectedObject);
-        
-        public void Clear();
     }
 }
