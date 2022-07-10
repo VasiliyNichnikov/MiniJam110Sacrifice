@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aec3fd4faa5c4c4891c6d34294d42509, type: 3}
   m_Name: Tree
   m_EditorClassIdentifier: 
+  _name: Tree
   _collectionTime: 2
   _quantity: 5
+  _amountOfFoodConsumedByOneUnit: 2

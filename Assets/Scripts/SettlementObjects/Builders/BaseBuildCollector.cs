@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using ClickObjects;
-using Economy.Resource;
 using SettlementObjects.Errors;
+using SettlementObjects.Resource;
 using SettlementObjects.Units;
 using Timer;
-using UI;
 using UnityEngine;
 
 namespace SettlementObjects.Builders
@@ -36,16 +34,12 @@ namespace SettlementObjects.Builders
         private IEnumerator _selectedWork;
         private int _numberOfWorkers;
         private IObjectToSelect[] _occupiedJobs;
+        
 
 
         public Vector3 SubscribeToJob(Unit unit)
         {
             var positionWork = GetPositionWork(unit);
-            if (_selectedWork == null)
-            {
-                _selectedWork = Work();
-                StartCoroutine(_selectedWork);
-            }
             positionWork.y = 0.0f;
             return positionWork;
         }
@@ -76,18 +70,16 @@ namespace SettlementObjects.Builders
                     break;
                 }
             }
-
-            if (_numberOfWorkers == 0)
-            {
-                StopCoroutine(_selectedWork);
-                _selectedWork = null;
-            }
         }
         
 
         private void Start()
         {
             _occupiedJobs = new IObjectToSelect[_positionsForSettlers.Length];
+
+            if (_selectedWork != null) return;
+            _selectedWork = Work();
+            StartCoroutine(_selectedWork);
         }
 
         private IEnumerator Work()
@@ -100,7 +92,7 @@ namespace SettlementObjects.Builders
                 {
                     yield return timer.Coroutine();
                     var quantity = Resource.Quantity * _numberOfWorkers;
-                    EventsManager.AdditionResource(quantity, Resource);
+                    ResourceCreditingEvents.UpdateResource(quantity, Resource);
                 }
             }
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using Economy.Resource;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,44 +8,15 @@ namespace UI.Resource
     public abstract class ResourceSliderChanger : MonoBehaviour
     {
         private Slider _slider;
-
-        private void OnEnable()
+        
+        public void ChangeValue(int newValue)
         {
-            EventsManager.AdditionResource += AddResource;
-            EventsManager.SubtractionResource += SubtractResource;
+            if (newValue < 0 || newValue > 100)
+                throw new Exception("Передано не верное значение"); // todo добавить фильтр
+            
+            _slider.value = newValue;
         }
-
-        private void OnDisable()
-        {
-            EventsManager.AdditionResource -= AddResource;
-            EventsManager.SubtractionResource -= SubtractResource;
-        }
-
-        protected virtual void AddResource(int value, IResource resource)
-        {
-            var currentValue = _slider.value;
-            if (currentValue + value > _slider.maxValue)
-            {
-                currentValue = _slider.maxValue;
-            }
-            else
-            {
-                currentValue = _slider.value + value;
-            }
-
-            _slider.value = currentValue;
-        }
-
-        protected virtual void SubtractResource(int value, IResource resource)
-        {
-            var currentValue = _slider.value;
-            if (currentValue - value < 0)
-            {
-                throw new Exception("Передано не верное значение. Кол-во продуктов не может быть < 0"); // todo Добавить фильтр 
-            }
-            currentValue = _slider.value - value;  
-            _slider.value = currentValue;
-        }
+       
         
         private void Start()
         {

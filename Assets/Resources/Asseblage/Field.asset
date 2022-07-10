@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e22036f1e186450cb0c918b64d62eaca, type: 3}
   m_Name: Field
   m_EditorClassIdentifier: 
+  _name: Field
   _collectionTime: 5
   _quantity: 15
+  _amountOfFoodConsumedByOneUnit: 5
