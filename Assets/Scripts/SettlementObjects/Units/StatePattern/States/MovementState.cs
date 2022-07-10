@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SettlementObjects.Units.StatePattern.States
+﻿namespace SettlementObjects.Units.StatePattern.States
 {
     public class MovementState : State
     {
@@ -27,12 +25,11 @@ namespace SettlementObjects.Units.StatePattern.States
                 Unit.Agent.SetDestination(Unit.Action.position);
             }
             
-
             // TODO Добавить настройки distance и remainingDistacne
-            if (Unit.Agent.remainingDistance <= 0.5f) // || Unit.Agent.remainingDistance <= 0.2f && Unit.Agent.hasPath
+            if (Unit.Agent.remainingDistance <= 0.5f && Unit.Agent.hasPath) // || Unit.Agent.remainingDistance <= 0.2f && Unit.Agent.hasPath
             {
                 Unit.ResetParametersAction();
-                StateMachine.ChangeState(Unit.Idle); // TODO перенести состояние из Unit
+                StateMachine.ChangeState(Unit.Idle);
             }
         }
     }
