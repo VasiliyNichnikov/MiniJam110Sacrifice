@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SettlementObjects.Units.StatePattern.States
+﻿namespace SettlementObjects.Units.StatePattern.States
 {
     public class IdleState : State
     {
@@ -12,7 +10,7 @@ namespace SettlementObjects.Units.StatePattern.States
         {
             base.Enter();
             // Отключаем анимацию
-            // Unit.Animator.SetFloat("Speed", 0); // TODO Нужно исправить "Speed" на константу
+            Unit.Animator.SetFloat("Speed", 0); // TODO Нужно исправить "Speed" на константу
             // Прекращение движения
             Unit.Agent.isStopped = true;
             // Прекращаем действия, которые могут выполняться юнитом

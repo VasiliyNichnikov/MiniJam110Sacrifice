@@ -38,6 +38,9 @@ namespace ManagementOfSettlers.UnitSelection
         {
             foreach (var selectedObject in _buffer.SelectedObjects)
             {
+                if(selectedObject == null)
+                    return;
+                
                 if (selectedObject.CheckSelection(_camera, startSelectionPanel, endSelectionPanel) && _selectedObjects.Contains(selectedObject) == false)
                     Selection(selectedObject);
                 else if (selectedObject.CheckSelection(_camera, startSelectionPanel, endSelectionPanel) == false && _selectedObjects.Contains(selectedObject))
