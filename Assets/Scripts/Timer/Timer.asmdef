@@ -1,9 +1,7 @@
 {
-    "name": "UI",
+    "name": "Timer",
     "rootNamespace": "",
-    "references": [
-        "GUID:4b96cacea8578bb4b95b07a58087b17d"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

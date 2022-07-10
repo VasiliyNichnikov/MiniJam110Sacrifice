@@ -1,4 +1,5 @@
-﻿using SettlementObjects.Units;
+﻿using Economy.Resource;
+using SettlementObjects.Units;
 using UnityEngine;
 
 namespace SettlementObjects.Builders
