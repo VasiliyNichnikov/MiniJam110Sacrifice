@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SettlementObjects.Units.StatePattern.States
+﻿namespace SettlementObjects.Units.StatePattern.States
 {
     public class MovementState : State
     {

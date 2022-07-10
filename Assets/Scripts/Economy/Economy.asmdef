@@ -1,10 +1,10 @@
 {
-    "name": "SettlementObjects",
+    "name": "Economy",
     "rootNamespace": "",
     "references": [
-        "GUID:439ef146850dd744e99d274c0f626bd0",
-        "GUID:3fa48a1babf1c194ca8dabda1070e780",
-        "GUID:44918feba329850479fb21ee1091ce51"
+        "GUID:54dfb48d80600a449b5d4e860987e05a",
+        "GUID:7262326d00c458e44bf68bedb50b333e",
+        "GUID:ae5d486223586494296486b3352c74c6"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

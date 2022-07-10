@@ -1,11 +1,7 @@
 {
-    "name": "SettlementObjects",
+    "name": "Timer",
     "rootNamespace": "",
-    "references": [
-        "GUID:439ef146850dd744e99d274c0f626bd0",
-        "GUID:3fa48a1babf1c194ca8dabda1070e780",
-        "GUID:44918feba329850479fb21ee1091ce51"
-    ],
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
