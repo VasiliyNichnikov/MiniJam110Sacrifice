@@ -1,6 +1,4 @@
-﻿using SettlementObjects.Builders;
-
-namespace SettlementObjects.Units.StatePattern.States
+﻿namespace SettlementObjects.Units.StatePattern.States
 {
     public class IdleState : State
     {
@@ -22,17 +20,8 @@ namespace SettlementObjects.Units.StatePattern.States
         public override void LogicUpdate()
         {
             base.LogicUpdate();
-            if (Unit.Click.hit.IsClick == false) return;
-            if (Unit.Click.hit.IsAction)
-            {
-                var builder = GetBuilderForWork();
-                if (builder is Trees)
-                {
-                    StateMachine.ChangeState(Unit.Felling);
-                    return;
-                }
-            }
-            StateMachine.ChangeState(Unit.Walking); // TODO перенести состояние из Unit
+            if (Unit.Action.clickedObject.IsClick == false) return;
+            StateMachine.ChangeState(Unit.Movement); // TODO перенести состояние из Unit
         }
     }
 }

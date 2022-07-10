@@ -61,8 +61,8 @@ namespace ManagementOfSettlers.UnitSelection
                 if (obj is Unit unit)
                 {
                     if (unit == null) throw new Exception("Unit must not be null"); // todo создать ошибку
-                    var newPosition = (clicking.hit, targetPositionList[targetPositionListIndex]);
-                    unit.SetClick(newPosition);
+                    var newAction = (clicking.hit, targetPositionList[targetPositionListIndex]);
+                    unit.SetParametersAction(newAction);
                     targetPositionListIndex = (targetPositionListIndex + 1) % targetPositionList.Count;
                 }
             }

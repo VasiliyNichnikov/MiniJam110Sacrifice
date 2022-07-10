@@ -1,13 +1,12 @@
-﻿using UnityEngine;
+﻿using SettlementObjects.Units;
+using UnityEngine;
 
 namespace SettlementObjects.Builders
 {
     public interface IBuilder
     {
-        public bool IsJobAvailable();
+        public Vector3 SubscribeToJob(Unit unit);
 
-        public Vector3 SubscribeToJob();
-
-        public void UnsubscribeToWork();
+        public void UnsubscribeToWork(Unit unit);
     }
 }

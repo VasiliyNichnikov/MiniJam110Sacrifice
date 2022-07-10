@@ -31,17 +31,5 @@ namespace SettlementObjects.Units.StatePattern
         {
             
         }
-        
-        protected IBuilder GetBuilderForWork()
-        {
-            if (Unit.Click.hit.IsAction == false)
-                throw new Exception("This position is not buildable"); // todo отфлильтровать ошибку
-            
-            if (Unit.Click.hit is IBuilder build)
-            {
-                return build;
-            }
-            throw new Exception("This position is not buildable"); // todo отфлильтровать ошибку
-        }
     }
 }

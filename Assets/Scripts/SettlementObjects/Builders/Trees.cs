@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using ClickObjects;
+﻿using ClickObjects;
+using SettlementObjects.Errors;
 using SettlementObjects.Units;
 using UnityEngine;
 
@@ -10,31 +9,50 @@ namespace SettlementObjects.Builders
     {
         [SerializeField, Header("Позиции для поселенцев, где они могут работать")]
         private Transform[] _positionsForSettlers;
-
-        // private List<IObjectToSelect> _workers;
+        
         public bool IsClick => true;
-        public bool IsAction => true;
+        public bool IsWork => true;
+        
+        private IObjectToSelect[] _occupiedJobs;
+        
 
-        private int _numberOfJobsOccupied;
-
-        public bool IsJobAvailable()
+        public Vector3 SubscribeToJob(Unit unit)
         {
-            return _numberOfJobsOccupied < _positionsForSettlers.Length;
-        }
-
-        public Vector3 SubscribeToJob()
-        {
-            // taskWorker.SubscribeTask();
-            var positionWork = _positionsForSettlers[_numberOfJobsOccupied].position;
+            var positionWork = GetPositionWork(unit);
             positionWork.y = 0.0f;
-            _numberOfJobsOccupied++;
             return positionWork;
         }
 
-        public void UnsubscribeToWork()
+        public void UnsubscribeToWork(Unit unit)
         {
-            _numberOfJobsOccupied--;
-            // taskWorker.UnsubscribeToWork();
+            for (var indexJob = 0; indexJob < _occupiedJobs.Length; indexJob++)
+            {
+                if (ReferenceEquals(_occupiedJobs[indexJob], unit))
+                {
+                    _occupiedJobs[indexJob] = null;
+                    break;
+                }
+            }
         }
+
+        private Vector3 GetPositionWork(Unit unit)
+        {
+            for (var indexJob = 0; indexJob < _occupiedJobs.Length; indexJob++)
+            {
+                if (_occupiedJobs[indexJob] == null)
+                {
+                    _occupiedJobs[indexJob] = unit;
+                    return _positionsForSettlers[indexJob].position;
+                }
+            }
+
+            throw new AllSeatsAreOccupied();
+        }
+        
+        private void Start()
+        {
+            _occupiedJobs = new IObjectToSelect[_positionsForSettlers.Length];
+        }
+        
     }
 }

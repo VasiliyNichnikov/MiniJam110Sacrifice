@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace SettlementObjects.Units.StatePattern
+﻿namespace SettlementObjects.Units.StatePattern
 {
     public class StateMachine
     {
@@ -13,8 +11,7 @@ namespace SettlementObjects.Units.StatePattern
         }
 
         public void ChangeState(State newState)
-        {
-            MonoBehaviour.print($"Current state: {CurrentState}");
+        { ;
             CurrentState.Exit();
 
             CurrentState = newState;

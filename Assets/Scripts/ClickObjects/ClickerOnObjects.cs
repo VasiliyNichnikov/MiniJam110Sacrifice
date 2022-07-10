@@ -26,7 +26,9 @@ namespace ClickObjects
             {
                 var obj = hit.collider.GetComponent<IClickObject>();
                 if (obj != null)
+                {
                     return (obj, hit.point);
+                }
             }
             throw new Exception("No hit detected"); // TODO отфильтровать ошибку
         }
