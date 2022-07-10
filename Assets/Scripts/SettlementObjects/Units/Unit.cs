@@ -53,7 +53,6 @@ namespace SettlementObjects.Units
                 
             }
             Action = selectedAction;
-            print($"Position: {Action.position}");
         }
 
         public void ResetParametersAction()
