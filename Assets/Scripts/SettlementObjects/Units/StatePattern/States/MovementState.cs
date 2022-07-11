@@ -38,6 +38,7 @@ namespace SettlementObjects.Units.StatePattern.States
                     {
                         Trees _ => Unit.Logger,
                         Field _ => Unit.Field,
+                        Altar _ => Unit.Dead,
                         _ => throw new ArgumentNullException()
                     };
                     StateMachine.ChangeState(state);

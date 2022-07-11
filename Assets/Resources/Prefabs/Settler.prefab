@@ -5927,6 +5927,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _selector: {fileID: 7038775601730283224}
   ToolAxe: {fileID: 7885707068553126332}
+  _meat: {fileID: 11400000, guid: 3afc25e6fe64587478e887501b93036f, type: 2}
+  _tree: {fileID: 11400000, guid: 8061f7816d259e3429a643721018a52f, type: 2}
+  _income: 10
 --- !u!195 &7038775601318342229
 NavMeshAgent:
   m_ObjectHideFlags: 0

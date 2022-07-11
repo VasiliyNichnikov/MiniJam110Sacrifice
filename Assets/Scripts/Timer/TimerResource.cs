@@ -15,11 +15,6 @@ namespace Timer
             _collectionTime = collectionTime;
         }
 
-        public void ResetTimer()
-        {
-            InProgress = false;
-        }
-
         public IEnumerator Coroutine()
         {
             InProgress = true;
