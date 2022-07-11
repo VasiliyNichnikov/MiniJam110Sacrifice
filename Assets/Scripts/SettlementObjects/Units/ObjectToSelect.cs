@@ -5,12 +5,12 @@ namespace SettlementObjects.Units
 {
     public abstract class ObjectToSelect : MonoBehaviour, IObjectToSelect
     {
-        public Transform ThisTransform { get; private set; }
-
+        protected Transform ThisTransform { get; private set; }
+        
         [SerializeField, Header("Объект, показывающий игроку, что юнит выделен")]
         private GameObject _selector;
-        public bool IsSelected { get; private set; }
-
+        private bool _notHighlight;
+        
         public bool CheckSelection(Camera camera, Vector3 startSelectionPanel, Vector3 endSelectionPanel)
         {
             return SelectionUtilities.CheckRectangleHit(camera, ThisTransform.position, 
@@ -19,16 +19,26 @@ namespace SettlementObjects.Units
 
         public void Highlight()
         {
-            IsSelected = true;
+            if(_notHighlight)
+                return;
+            
             SelectionUtilities.ChangeStateSelector(_selector, true);
         }
 
         public void CancelSelection()
         {
-            IsSelected = false;
+            if(_notHighlight)
+                return;
+            
             SelectionUtilities.ChangeStateSelector(_selector, false);
         }
-        
+
+        public void TurnOffSelection()
+        {
+            CancelSelection();
+            _notHighlight = true;
+        }
+
         public virtual void Start()
         {
             SelectionUtilities.ChangeStateSelector(_selector, false);

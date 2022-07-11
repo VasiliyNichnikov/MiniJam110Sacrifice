@@ -1,8 +1,10 @@
+using System.Collections;
 using ClickObjects;
 using SettlementObjects.Builders;
 using SettlementObjects.Errors;
 using SettlementObjects.Units.StatePattern;
 using SettlementObjects.Units.StatePattern.States;
+using Timer;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,13 +16,16 @@ namespace SettlementObjects.Units
         public MovementState Movement;
         public LoggerState Logger;
         public FieldState Field;
+        public DeadState Dead;
+
+        public bool IsDied { get; private set; }
 
         public (IClickObject clickedObject, Vector3 position) Action { get; private set; }
-        public IBuilder BuilderWork { get; private set; }
+        private IBuilder BuilderWork { get; set; }
         public NavMeshAgent Agent => _agent;
         public Animator Animator => _animator;
         public GameObject ToolAxe;
-
+        
         private StateMachine _stateMachine;
         private Animator _animator;
         private NavMeshAgent _agent;
@@ -42,7 +47,7 @@ namespace SettlementObjects.Units
             Movement = new MovementState(this, _stateMachine);
             Logger = new LoggerState(this, _stateMachine);
             Field = new FieldState(this, _stateMachine);
-            
+            Dead = new DeadState(this, _stateMachine);
             _stateMachine.Initialize(Idle);
         }
 
@@ -69,9 +74,18 @@ namespace SettlementObjects.Units
         {
             Action = (new NoneObject(), Vector3.zero);
         }
+
+        public void Die()
+        {
+            TurnOffSelection();
+            IsDied = true;
+            EventsUnit.RemoveObjectFromSelectedObjects(this);
+            StartCoroutine(DestroyPerson());
+        }
         
         private void Update()
         {
+            if(IsDied) return;
             _stateMachine.CurrentState.HandleInput();
             _stateMachine.CurrentState.LogicUpdate();
         }
@@ -100,5 +114,13 @@ namespace SettlementObjects.Units
                 Gizmos.DrawLine(Action.position, ThisTransform.position);
             }
         }
+        
+        private IEnumerator DestroyPerson()
+        {
+            var timer = new TimerDead(collectionTime: 2.5f);
+            yield return timer.Coroutine();
+            Destroy(gameObject);
+        }
+        
     }
 }

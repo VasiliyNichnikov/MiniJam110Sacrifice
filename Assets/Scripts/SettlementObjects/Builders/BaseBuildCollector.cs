@@ -11,8 +11,6 @@ namespace SettlementObjects.Builders
         public bool IsWork => true;
         public int NumberOfWorkers { get; private set; }
 
-
-
         [SerializeField, Header("Позиции для поселенцев, где они могут работать")]
         private Transform[] _positionsForSettlers;
         
