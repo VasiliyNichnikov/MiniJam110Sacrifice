@@ -13,6 +13,12 @@ namespace Economy
         [SerializeField, Header("Буфер всех объектов на сцене")]
         private BufferOfSelectedObjects _buffer;
 
+        [SerializeField, Header("Кол-во еды при старте"), Range(0, 100)]
+        private int _mealDefault;
+
+        [SerializeField, Header("Кол-во дерева при старте"), Range(0, 100)]
+        private int _treeDefault;
+        
         [SerializeField, Header("Полоса еды")] private MealSlider _meal;
 
         [SerializeField, Header("Полоса строительных материалов")]
@@ -24,6 +30,12 @@ namespace Economy
         private void Start()
         {
             _incomeCalculation = new IncomeCalculation(_buffer);
+            // todo для спешки, исправить
+            PlayerPrefs.SetInt("field", _mealDefault);
+            PlayerPrefs.SetInt("tree", _treeDefault);
+            
+            _meal.ChangeValue(PlayerPrefs.GetInt("field"));
+            _constructionSlider.ChangeValue(PlayerPrefs.GetInt("tree"));
         }
 
         private void OnEnable()
@@ -51,7 +63,6 @@ namespace Economy
                 if (currentValue - absIncome <= 0)
                 {
                     ChangeCountToResource(resource, result);
-                    print("Начинается голод/Нехватка ресурса");
                 }
                 else
                 {
@@ -95,12 +106,12 @@ namespace Economy
         
         private int GetCountResource(IResource resource)
         {
-            return PlayerPrefs.GetInt(resource.Name);
+            return PlayerPrefs.GetInt(resource.Name.ToLower());
         }
 
         private void ChangeCountToResource(IResource resource, int newValue)
         {
-            PlayerPrefs.SetInt(resource.Name, newValue);
+            PlayerPrefs.SetInt(resource.Name.ToLower(), newValue);
         }
     }
 }

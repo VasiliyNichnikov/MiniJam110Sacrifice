@@ -63,11 +63,11 @@ namespace SettlementObjects.Units
 
         public void SetParametersAction((IClickObject clickedObject, Vector3 position) selectedAction)
         {
-            // if (selectedAction.clickedObject == BuilderWork)
-            // {
-            //     print("they equel");
-            //     return;
-            // }
+            if (selectedAction.clickedObject == _builderWork)
+            {
+                // print("they equel");
+                return;
+            }
             
             _builderWork?.UnsubscribeToWork(this);
             _builderWork = null;

@@ -18,7 +18,7 @@ namespace UI.Resource
         }
        
         
-        private void Start()
+        private void Awake()
         {
             _slider = GetComponent<Slider>();
             SettingsSlider();
