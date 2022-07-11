@@ -1,0 +1,17 @@
+{
+    "name": "HighlightingSettlementObjects",
+    "rootNamespace": "",
+    "references": [
+        "GUID:54dfb48d80600a449b5d4e860987e05a",
+        "GUID:3fa48a1babf1c194ca8dabda1070e780"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
