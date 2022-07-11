@@ -1,8 +1,11 @@
+using System.Collections;
 using ClickObjects;
 using SettlementObjects.Builders;
 using SettlementObjects.Errors;
+using SettlementObjects.Resource;
 using SettlementObjects.Units.StatePattern;
 using SettlementObjects.Units.StatePattern.States;
+using Timer;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -14,13 +17,25 @@ namespace SettlementObjects.Units
         public MovementState Movement;
         public LoggerState Logger;
         public FieldState Field;
+        public DeadState Dead;
+
+        public bool IsDied { get; private set; }
 
         public (IClickObject clickedObject, Vector3 position) Action { get; private set; }
-        public IBuilder BuilderWork { get; private set; }
         public NavMeshAgent Agent => _agent;
         public Animator Animator => _animator;
         public GameObject ToolAxe;
 
+        [SerializeField, Header("Еда за приношение в жертву")]
+        private ScriptableObject _meat;
+
+        [SerializeField, Header("Дерево за приношение в жертву")]
+        private ScriptableObject _tree;
+
+        [SerializeField, Header("Кол-во еды и древесины за жертвоприношение"), Range(0, 30)]
+        private int _income;
+        
+        private IBuilder _builderWork;
         private StateMachine _stateMachine;
         private Animator _animator;
         private NavMeshAgent _agent;
@@ -42,36 +57,55 @@ namespace SettlementObjects.Units
             Movement = new MovementState(this, _stateMachine);
             Logger = new LoggerState(this, _stateMachine);
             Field = new FieldState(this, _stateMachine);
-            
+            Dead = new DeadState(this, _stateMachine);
             _stateMachine.Initialize(Idle);
         }
 
         public void SetParametersAction((IClickObject clickedObject, Vector3 position) selectedAction)
         {
-            if(selectedAction.clickedObject == BuilderWork)
+            if (selectedAction.clickedObject == _builderWork)
+            {
+                // print("they equel");
                 return;
+            }
             
-            BuilderWork?.UnsubscribeToWork(this);
-            BuilderWork = null;
+            _builderWork?.UnsubscribeToWork(this);
+            _builderWork = null;
             try
             {
-                BuilderWork = GetBuilderForWork(selectedAction);
-                selectedAction.position = BuilderWork.SubscribeToJob(this);
+                _builderWork = GetBuilderForWork(selectedAction);
+                selectedAction.position = _builderWork.SubscribeToJob(this);
+                Action = selectedAction;
             }
-            catch (ObjectIsNotBuilding)
+            catch (AllSeatsAreOccupied)
             {
-                
+                ResetParametersAction();
             }
-            Action = selectedAction;
+            catch (ObjectIsNotBuilder)
+            {
+                Action = selectedAction;
+            }
         }
 
         public void ResetParametersAction()
         {
             Action = (new NoneObject(), Vector3.zero);
         }
+
+        public void Die()
+        {
+            TurnOffSelection();
+            IsDied = true;
+            EventsUnit.RemoveObjectFromSelectedObjects(this);
+            ResourceCreditingEvents.UpdateResourceFromVictim(_income, (IResource)_meat);
+            ResourceCreditingEvents.UpdateResourceFromVictim(_income, (IResource)_tree);
+            StartCoroutine(DestroyPerson());
+        }
+        
         
         private void Update()
         {
+            if(IsDied) return;
             _stateMachine.CurrentState.HandleInput();
             _stateMachine.CurrentState.LogicUpdate();
         }
@@ -80,7 +114,7 @@ namespace SettlementObjects.Units
         {
             if (selectedAction.clickedObject.IsWork == false)
             {
-                throw new ObjectIsNotBuilding();
+                throw new ObjectIsNotBuilder();
             }
                 
             
@@ -88,7 +122,7 @@ namespace SettlementObjects.Units
             {
                 return build;
             }
-            throw new ObjectIsNotBuilding();
+            throw new ObjectIsNotBuilder();
         }
         
         private void OnDrawGizmos()
@@ -100,5 +134,13 @@ namespace SettlementObjects.Units
                 Gizmos.DrawLine(Action.position, ThisTransform.position);
             }
         }
+        
+        private IEnumerator DestroyPerson()
+        {
+            var timer = new TimerDead(collectionTime: 2.5f);
+            yield return timer.Coroutine();
+            Destroy(gameObject);
+        }
+        
     }
 }

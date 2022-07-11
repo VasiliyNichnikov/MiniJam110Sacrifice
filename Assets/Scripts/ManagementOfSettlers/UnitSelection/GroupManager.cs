@@ -38,9 +38,6 @@ namespace ManagementOfSettlers.UnitSelection
         {
             foreach (var selectedObject in _buffer.SelectedObjects)
             {
-                if(selectedObject == null)
-                    return;
-                
                 if (selectedObject.CheckSelection(_camera, startSelectionPanel, endSelectionPanel) && _selectedObjects.Contains(selectedObject) == false)
                     Selection(selectedObject);
                 else if (selectedObject.CheckSelection(_camera, startSelectionPanel, endSelectionPanel) == false && _selectedObjects.Contains(selectedObject))
@@ -63,7 +60,6 @@ namespace ManagementOfSettlers.UnitSelection
             {
                 if (obj is Unit unit)
                 {
-                    if (unit == null) throw new Exception("Unit must not be null"); // todo создать ошибку
                     var newAction = (clicking.hit, targetPositionList[targetPositionListIndex]);
                     unit.SetParametersAction(newAction);
                     targetPositionListIndex = (targetPositionListIndex + 1) % targetPositionList.Count;

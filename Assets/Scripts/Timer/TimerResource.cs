@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace Timer
@@ -13,11 +12,6 @@ namespace Timer
         public TimerResource(float collectionTime)
         {
             _collectionTime = collectionTime;
-        }
-
-        public void ResetTimer()
-        {
-            InProgress = false;
         }
 
         public IEnumerator Coroutine()

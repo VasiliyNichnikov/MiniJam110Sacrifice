@@ -18,6 +18,7 @@ namespace HighlightingSettlementObjects
         
         private ClickerOnObjects _clicker;
         private GroupManager _group;
+        
 
         /// <summary>
         /// Выделяет/Убирает выделение с объектов, которые попадают/не попадают в зону панели
