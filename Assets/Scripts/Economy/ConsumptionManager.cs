@@ -29,11 +29,13 @@ namespace Economy
         private void OnEnable()
         {
             ResourceCreditingEvents.UpdateResource += UpdateCountSelectedResource;
+            ResourceCreditingEvents.UpdateResourceFromVictim += UpdateResourcesFromVictim;
         }
 
         private void OnDisable()
         {
             ResourceCreditingEvents.UpdateResource -= UpdateCountSelectedResource;
+            ResourceCreditingEvents.UpdateResourceFromVictim -= UpdateResourcesFromVictim;
         }
 
         private void UpdateCountSelectedResource(int extracted, IResource resource)
@@ -49,7 +51,7 @@ namespace Economy
                 if (currentValue - absIncome <= 0)
                 {
                     ChangeCountToResource(resource, result);
-                    Debug.Log("Начинается голод/Нехватка ресурса");
+                    print("Начинается голод/Нехватка ресурса");
                 }
                 else
                 {
@@ -67,6 +69,17 @@ namespace Economy
             slider.ChangeValue(result);
         }
 
+        private void UpdateResourcesFromVictim(int income, IResource resource)
+        {
+            var currentValue = GetCountResource(resource);
+            var slider = GetSlider(resource);
+            var result = currentValue + income;
+            if (result > 100)
+                result = 100;
+            ChangeCountToResource(resource, result);
+            slider.ChangeValue(result);
+        }
+        
         private ResourceSliderChanger GetSlider(IResource resource)
         {
             switch (resource)

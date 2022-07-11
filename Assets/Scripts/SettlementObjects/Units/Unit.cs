@@ -2,6 +2,7 @@ using System.Collections;
 using ClickObjects;
 using SettlementObjects.Builders;
 using SettlementObjects.Errors;
+using SettlementObjects.Resource;
 using SettlementObjects.Units.StatePattern;
 using SettlementObjects.Units.StatePattern.States;
 using Timer;
@@ -25,6 +26,15 @@ namespace SettlementObjects.Units
         public NavMeshAgent Agent => _agent;
         public Animator Animator => _animator;
         public GameObject ToolAxe;
+
+        [SerializeField, Header("Еда за приношение в жертву")]
+        private ScriptableObject _meat;
+
+        [SerializeField, Header("Дерево за приношение в жертву")]
+        private ScriptableObject _tree;
+
+        [SerializeField, Header("Кол-во еды и древесины за жертвоприношение"), Range(0, 30)]
+        private int _income;
         
         private StateMachine _stateMachine;
         private Animator _animator;
@@ -80,6 +90,8 @@ namespace SettlementObjects.Units
             TurnOffSelection();
             IsDied = true;
             EventsUnit.RemoveObjectFromSelectedObjects(this);
+            ResourceCreditingEvents.UpdateResourceFromVictim(_income, (IResource)_meat);
+            ResourceCreditingEvents.UpdateResourceFromVictim(_income, (IResource)_tree);
             StartCoroutine(DestroyPerson());
         }
         
