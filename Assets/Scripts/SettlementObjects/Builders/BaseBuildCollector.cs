@@ -26,6 +26,9 @@ namespace SettlementObjects.Builders
         
         private Vector3 GetPositionWork(Unit unit)
         {
+            if(NumberOfWorkers == _occupiedJobs.Length)
+                throw new AllSeatsAreOccupied();
+            
             for (var indexJob = 0; indexJob < _occupiedJobs.Length; indexJob++)
             {
                 if (_occupiedJobs[indexJob] == null)

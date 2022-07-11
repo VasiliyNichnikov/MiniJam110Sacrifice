@@ -6,7 +6,7 @@ namespace SettlementObjects.Errors
     {
     }
 
-    public class ObjectIsNotBuilding : BuilderError
+    public class ObjectIsNotBuilder : BuilderError
     {
     }
 

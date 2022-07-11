@@ -22,7 +22,6 @@ namespace SettlementObjects.Units
         public bool IsDied { get; private set; }
 
         public (IClickObject clickedObject, Vector3 position) Action { get; private set; }
-        private IBuilder BuilderWork { get; set; }
         public NavMeshAgent Agent => _agent;
         public Animator Animator => _animator;
         public GameObject ToolAxe;
@@ -36,6 +35,7 @@ namespace SettlementObjects.Units
         [SerializeField, Header("Кол-во еды и древесины за жертвоприношение"), Range(0, 30)]
         private int _income;
         
+        private IBuilder _builderWork;
         private StateMachine _stateMachine;
         private Animator _animator;
         private NavMeshAgent _agent;
@@ -63,21 +63,28 @@ namespace SettlementObjects.Units
 
         public void SetParametersAction((IClickObject clickedObject, Vector3 position) selectedAction)
         {
-            if(selectedAction.clickedObject == BuilderWork)
-                return;
+            // if (selectedAction.clickedObject == BuilderWork)
+            // {
+            //     print("they equel");
+            //     return;
+            // }
             
-            BuilderWork?.UnsubscribeToWork(this);
-            BuilderWork = null;
+            _builderWork?.UnsubscribeToWork(this);
+            _builderWork = null;
             try
             {
-                BuilderWork = GetBuilderForWork(selectedAction);
-                selectedAction.position = BuilderWork.SubscribeToJob(this);
+                _builderWork = GetBuilderForWork(selectedAction);
+                selectedAction.position = _builderWork.SubscribeToJob(this);
+                Action = selectedAction;
             }
-            catch (ObjectIsNotBuilding)
+            catch (AllSeatsAreOccupied)
             {
-                
+                ResetParametersAction();
             }
-            Action = selectedAction;
+            catch (ObjectIsNotBuilder)
+            {
+                Action = selectedAction;
+            }
         }
 
         public void ResetParametersAction()
@@ -95,6 +102,7 @@ namespace SettlementObjects.Units
             StartCoroutine(DestroyPerson());
         }
         
+        
         private void Update()
         {
             if(IsDied) return;
@@ -106,7 +114,7 @@ namespace SettlementObjects.Units
         {
             if (selectedAction.clickedObject.IsWork == false)
             {
-                throw new ObjectIsNotBuilding();
+                throw new ObjectIsNotBuilder();
             }
                 
             
@@ -114,7 +122,7 @@ namespace SettlementObjects.Units
             {
                 return build;
             }
-            throw new ObjectIsNotBuilding();
+            throw new ObjectIsNotBuilder();
         }
         
         private void OnDrawGizmos()
